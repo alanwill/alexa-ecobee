@@ -12,8 +12,8 @@ def lambda_handler(event, context):
     table = dynamodb.Table('alexa-ecobee')
     response = table.scan()
     applicationIds = list()
-    for i in response['Items']['applicationId']:
-        applicationIds.append(i)
+    for i in response['Items']:
+        applicationIds.append(i['applicationId'])
 
     applicationId = event['session']['application']['applicationId']
     if applicationId not in applicationIds:
